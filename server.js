@@ -3,6 +3,7 @@ const io = require('socket.io')(3000,{cors: {
 }})
 
 io.on('connection', socket => {
-    console.log("new user")
-    socket.emit("chat-message", 'Hello World')
+    socket.on("send-message", message => {
+        socket.broadcast.emit("chat-message", message)
+    })
 })
